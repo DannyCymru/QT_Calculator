@@ -45,13 +45,6 @@ private slots:
     void seven();
     void eight();
     void nine();
-    void a();
-    void b();
-    void c();
-    void d();
-    void e();
-    void f();
-
 
 
 private:

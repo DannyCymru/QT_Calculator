@@ -7,9 +7,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    //Opens widget in "maximised"
-    w.showMaximized();
-
     //Sets show size to 300 x 400 pixels
     w.setFixedSize(300,400);
 
