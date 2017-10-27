@@ -16,9 +16,9 @@ To Do List
 
 -[x] Completed Task -[ ] Incomplete Task
 
--[] Fix deciaml conversion to octal
+-[x] Fix decimal conversion to octal
 
--[] Fix decimal conversion to hex
+-[x] Fix decimal conversion to hex
 
 -[] Add math operations with binary numbers.
 

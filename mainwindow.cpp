@@ -5,8 +5,8 @@
 #include <QDataStream>
 
 
-QString value = "", total = "", binary_string = "";
-int first_num, second_num, string_to_int;
+QString value = "", total = "", alt_string = "";
+int first_num, second_num, string_to_int, alt_num;
 bool add_bool = false, subtract_bool = false, multiply_bool = false, division_bool = false;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -176,31 +176,43 @@ void MainWindow::equals(){
 
     }
 
+    else {
+        total=QString::number(first_num + second_num);
+        label -> setText(total);
+
+    }
+
 }
 
 //numbering systems
 void MainWindow::binary(){
 
-        string_to_int = total.toInt();
-        std::string to_binary = std::bitset<12> (string_to_int).to_string();
-
-        binary_string = QString::fromStdString(to_binary);
+        QString alt_string = QString::number(total.toInt(), 2);
 
 
-        label -> setText(binary_string);
+        label -> setText(alt_string);
 }
 
 void MainWindow::octal(){
+
+    QString alt_string = QString::number(total.toInt(), 8);
+
+    label->setText(alt_string);
 
 
 }
 
 void MainWindow::hex(){
 
+    QString alt_string = QString::number(total.toInt(), 16).toUpper();
+
+    label->setText(alt_string);
+
 }
 
 //numbers/letters allowed
 void MainWindow::zero(){
+
     value = value + "0";
     label -> setText(value);
 
