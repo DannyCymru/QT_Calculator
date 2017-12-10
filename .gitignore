@@ -33,3 +33,7 @@
 
 #QT User Files
 *.pro.user
+
+*.user
+
+calculator\.pro\.user\.db073ba
