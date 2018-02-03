@@ -4,10 +4,19 @@
 #include <bitset>
 #include <QDataStream>
 
+//Global variable initialisations
+QString value {""};
+QString total {""};
+QString alt_string {""};
 
-QString value = "", total = "", alt_string = "";
-int first_num, second_num, string_to_int, alt_num;
-bool add_bool = false, subtract_bool = false, multiply_bool = false, division_bool = false;
+char c_operator {'>'};
+
+double first_num{0};
+double second_num{0};
+double string_to_double{0};
+double alt_num{0};
+
+//Sets up and positions all the buttons
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -101,93 +110,95 @@ MainWindow::~MainWindow()
 
 //Screen clear
 void MainWindow::clear(){
-    value = "";
-    label -> setText(value);
+
+    //Resets all variables that are stored and shown to the end user, clears up any bugs with there being values being stored after hitting clear
+    first_num=0;
+    second_num=0;
+    value="0";
+
+    label -> setText("");
+
 }
 
 //basic operations
 void MainWindow::add(){
 
-    first_num = value.toInt();
+    first_num = value.toDouble();
     value = "";
     label -> setText(value);
 
-    add_bool = true;
+    c_operator = '+';
 
 }
 
 void MainWindow::subtract(){
 
-    first_num = value.toInt();
+    first_num = value.toDouble();
     value = "";
     label -> setText(value);
 
-    subtract_bool = true;
+    c_operator = '-';
 
 }
 
 void MainWindow::multiply(){
 
-    first_num = value.toInt();
+    first_num = value.toDouble();
     value = "";
     label -> setText(value);
 
-    multiply_bool = true;
+    c_operator = '*';
 
 }
 
 void MainWindow::division(){
 
-    first_num = value.toInt();
+    first_num = value.toDouble();
     value = "";
     label -> setText(value);
 
-    division_bool = true;
+    c_operator='/';
 
 }
 
 void MainWindow::equals(){
-    second_num = value.toInt();
+    second_num = value.toDouble();
 
-    if (add_bool) {
+    switch(c_operator) {
 
-       total = QString::number(first_num + second_num);
-       label -> setText(total);
+        case '-':
+            total = QString::number(first_num - second_num);
+            label -> setText(total);
+        break;
+
+        case '*':
+            total = QString::number(first_num * second_num);
+            label -> setText(total);
+        break;
+
+
+        case '/':
+            total = QString::number(first_num / second_num);
+            label -> setText(total);
+        break;
+
+        case '+':
+            total = QString::number(first_num + second_num);
+            label -> setText(total);
+        break;
+
+        default:
+
+        break;
     }
 
-    if (subtract_bool) {
-
-        total = QString::number(first_num - second_num);
-        label -> setText(total);
-
-    }
-
-   if (multiply_bool) {
-
-        total = QString::number(first_num * second_num);
-        label -> setText(total);
-
-    }
-
-    if (division_bool) {
-
-        total = QString::number(first_num / second_num);
-        label -> setText(total);
-
-    }
-
-    else {
-        total=QString::number(first_num + second_num);
-        label -> setText(total);
-
-    }
 
 }
 
 //numbering systems
 void MainWindow::binary(){
 
-        QString alt_string = QString::number(total.toInt(), 2);
+        alt_string = QString::number(total.toInt(), 2);
 
 
         label -> setText(alt_string);
@@ -195,7 +206,7 @@ void MainWindow::binary(){
 
 void MainWindow::octal(){
 
-    QString alt_string = QString::number(total.toInt(), 8);
+    alt_string = QString::number(total.toInt(), 8);
 
     label->setText(alt_string);
 
@@ -204,7 +215,7 @@ void MainWindow::octal(){
 
 void MainWindow::hex(){
 
-    QString alt_string = QString::number(total.toInt(), 16).toUpper();
+    alt_string = QString::number(total.toInt(), 16).toUpper();
 
     label->setText(alt_string);
 
