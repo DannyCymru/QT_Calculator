@@ -31,7 +31,7 @@ edp_window_1::edp_window_1(QWidget *parent) :
     //Label to contain the numbers/calculation results
     result_label = new QLabel("0",this);
     result_label->setAlignment(Qt::AlignRight); //Aligns the information to the right
-    result_label->setGeometry(QRect(QPoint(10,85), QSize(280,25)));
+    result_label->setGeometry(QRect(QPoint(10,85), QSize(280,30)));
     result_label->setStyleSheet("font: 18pt; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
 
     //Creats a list view to hold all the previous calculations
