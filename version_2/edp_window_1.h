@@ -6,7 +6,6 @@
 #include <standard_math.h>
 #include <edp_window_2.h>
 
-extern double value;
 
 namespace Ui {
 class edp_window_1;

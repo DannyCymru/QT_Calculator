@@ -13,7 +13,7 @@ edp_window_2::edp_window_2(QWidget *parent) :
     ui(new Ui::edp_window_2)
 {
     ui->setupUi(this);
-    s_math = new standard_math();
+    a_math = new advanced_math();
 
     edp_window_2::setFixedSize(500, 340);
     setWindowTitle("EDP Calc Advanced View");
@@ -68,8 +68,6 @@ void edp_window_2::help_view(){
     hide();
 
 }
-
-
 
 void edp_window_2::calc_save(){
     qDebug() << "calc save" ;
@@ -202,25 +200,25 @@ void edp_window_2::period_press(){
 
 void edp_window_2::add_press(){
     edp2_val_1 = edp2_value;
-    c_op='+';
+    edp2_c_op='+';
     result_label->setText("");
 }
 
 void edp_window_2::div_press(){
     edp2_val_1 = edp2_value;
-    c_op='/';
+    edp2_c_op='/';
     result_label->setText("");
 }
 
 void edp_window_2::mult_press(){
     edp2_val_1 = edp2_value;
-    c_op='*';
+    edp2_c_op='*';
     result_label->setText("");
 }
 
 void edp_window_2::sub_press(){
     edp2_val_1 = edp2_value;
-    c_op='-';
+    edp2_c_op='-';
     result_label->setText("");
 }
 
@@ -234,29 +232,29 @@ void edp_window_2::clr_press(){
 }
 
 void edp_window_2::result_press(){
-    edp2_val_1 = edp2_value;
+    edp2_val_2 = edp2_value;
     operator_setup();
 }
 
-//Function to handle the actual s_math function calls
+//Function to handle the actual a_math function calls
 void edp_window_2::operator_setup(){
     //Switch statement to workout which function to call
-    switch (c_op) {
+    switch (edp2_c_op) {
         case '+':
-            s_math->add(val_1, val_2);
-            result_label->setText(QString::number(returned_val));
+            a_math->edp2_add(edp2_val_1, edp2_val_2);
+            result_label->setText(QString::number(edp2_returned_val));
             break;
         case '-':
-            s_math->subtract(val_1, val_2);
-            result_label->setText(QString::number(returned_val));
+            a_math->edp2_subtract(edp2_val_1, edp2_val_2);
+            result_label->setText(QString::number(edp2_returned_val));
             break;
         case '*':
-            s_math->multiply(val_1, val_2);
-            result_label->setText(QString::number(returned_val));
+            a_math->edp2_multiply(edp2_val_1, edp2_val_2);
+            result_label->setText(QString::number(edp2_returned_val));
             break;
         case '/':
-            s_math->divide(val_1, val_2);
-            result_label->setText(QString::number(returned_val));
+            a_math->edp2_divide(edp2_val_1, edp2_val_2);
+            result_label->setText(QString::number(edp2_returned_val));
             break;
         default:
             qDebug("Failure");
@@ -264,10 +262,22 @@ void edp_window_2::operator_setup(){
     }
 
     //Temporary container to store the full string of data to push back into the vector
-    pushback_container = QString::number(val_1) + " " + QString(c_op) + " " + QString::number(val_2) + " = " + QString::number(returned_val) + "\n";
+    pushback_container = QString::number(edp2_val_1) + " " + QString(edp2_c_op) + " " + QString::number(edp2_val_2) + " = " + QString::number(edp2_returned_val) + "\n";
     all_calculations.push_back(pushback_container);
     qt_history(edp2_List); //Calls the function with the "List", this is what will populate the list view. This will also add a new calculation everytime the result button is clicked.
 
+}
+
+//Function to allow some of the funcitonality to allow the list view to be more dynamic.
+void edp_window_2::qt_history(QStringList List){
+    //A range for loop to go through every value in the vector and push it through the List.
+    for(QString i : all_calculations ){
+        List << i;
+    }
+    //Connects the "List" to the history_list container.
+    history_list->setStringList(List);
+    history->setModel(history_list);
+    history->QAbstractItemView::scrollToBottom(); //Makes the list view scroll to the bottom. Effectively making it scroll to the bottom with each added calculation to the list.
 }
 
 

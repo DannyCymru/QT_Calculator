@@ -27,13 +27,15 @@ SOURCES += \
         main.cpp \
         edp_window_1.cpp \
         standard_math.cpp \
-        edp_window_2.cpp
+        edp_window_2.cpp \
+    advanced_math.cpp
 
 HEADERS += \
         edp_window_1.h \
         standard_math.h \
         edp_window_2.h \
-        included_headers.h
+        included_headers.h \
+    advanced_math.h
 
 FORMS += \
         edp_window_1.ui \

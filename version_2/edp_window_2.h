@@ -3,9 +3,7 @@
 
 #include <QMainWindow>
 #include <included_headers.h>
-#include <standard_math.h>
-
-extern double edp2_value;
+#include <advanced_math.h>
 
 namespace Ui {
 class edp_window_2;
@@ -71,7 +69,7 @@ private:
     QTimer *clear_timer;
 
     //Pointers
-    standard_math *s_math;
+    advanced_math *a_math;
     Ui::edp_window_2 *ui;
 };
 
