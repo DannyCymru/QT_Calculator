@@ -26,11 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         edp_window_1.cpp \
-        standard_math.cpp
+        standard_math.cpp \
+        edp_window_2.cpp
 
 HEADERS += \
         edp_window_1.h \
-        standard_math.h
+        standard_math.h \
+        edp_window_2.h \
+        included_headers.h
 
 FORMS += \
-        edp_window_1.ui
+        edp_window_1.ui \
+        edp_window_2.ui

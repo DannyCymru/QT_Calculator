@@ -1,58 +1,52 @@
-#ifndef EDP_WINDOW_1_H
-#define EDP_WINDOW_1_H
+#ifndef EDP_WINDOW_2_H
+#define EDP_WINDOW_2_H
 
-#include <QtCore/QCoreApplication>
 #include <QMainWindow>
+#include <included_headers.h>
 #include <standard_math.h>
-#include <edp_window_2.h>
 
-extern double value;
+extern double edp2_value;
 
 namespace Ui {
-class edp_window_1;
+class edp_window_2;
 }
 
-class edp_window_1 : public QMainWindow
+class edp_window_2 : public QMainWindow
 {
     Q_OBJECT
+
 public:
-    explicit edp_window_1(QWidget *parent = 0);
-    ~edp_window_1();
-
-
-
+    explicit edp_window_2(QWidget *parent = 0);
+    ~edp_window_2();
 
 private slots:
     void digit_press();
     void period_press();
+    void calc_save();
+    void help_view();
     void add_press();
     void sub_press();
     void div_press();
     void mult_press();
     void clr_press();
     void result_press();
-    void calc_save();
-    void av_view();
-    void help_view();
-
 
 private:
     //Functions
-    void create_digit_buttons();
-    void create_other_buttons();
-    void operator_setup();
-    void qt_history(QStringList List);
-    void create_actions();
     void create_menus();
+    void create_actions();
+    void create_lbuttons();
+    void create_smath_buttons();
+    void qt_history(QStringList edp2_List);
+    void operator_setup();
 
     //Objects
+    QLabel *result_label;
     QMenu *file_menu;
     QMenu *help;
     QMenu *view;
-    QAction *av_action;
     QAction *save_action;
     QAction *help_action;
-    QLabel *result_label;
     QListView *history;
     QStringListModel *history_list;
     QVector<QString> all_calculations;
@@ -76,14 +70,9 @@ private:
     QPushButton *clear_button;
     QTimer *clear_timer;
 
-
-
-    //Pointers for quicker access to functions from other headers/sources.
-    Ui::edp_window_1 *ui;
+    //Pointers
     standard_math *s_math;
-    edp_window_2 *window_2;
+    Ui::edp_window_2 *ui;
 };
 
-
-
-#endif // EDP_WINDOW_1_H
+#endif // EDP_WINDOW_2_H

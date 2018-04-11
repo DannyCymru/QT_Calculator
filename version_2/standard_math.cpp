@@ -1,5 +1,5 @@
 #include "standard_math.h"
-#include <QDebug>
+
 
 char c_op{'n'};
 

@@ -3,12 +3,12 @@
 
 #include <QMainWindow>
 #include <QWidget>
-#include <string>
 
-    extern double returned_val;
-    extern double val_1;
-    extern double val_2;
-    extern char c_op;
+//Variables
+extern double returned_val;
+extern double val_1;
+extern double val_2;
+extern char c_op;
 
 class standard_math
 {
@@ -16,10 +16,11 @@ class standard_math
 public:
     standard_math();
 
+    //functions
     double add(double val_1, double val_2);
     double subtract(double val_1, double val_2);
     double multiply(double val_1, double val_2);
-    double divide(double val_1, double val_2);
+    double divide(double val_1, double val_2); 
 
 private:
 
