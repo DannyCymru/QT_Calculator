@@ -23,13 +23,14 @@ edp_window_2::edp_window_2(QWidget *parent) :
     create_menus();
 
     //Populate the form with buttons
-    create_lbuttons();
+    create_rbuttons();
     create_smath_buttons();
+    create_lbuttons();
 
     //Label to contain the numbers/calculation results
     result_label = new QLabel("0",this);
     result_label->setAlignment(Qt::AlignRight); //Aligns the information to the right
-    result_label->setGeometry(QRect(QPoint(10,85), QSize(480,25)));
+    result_label->setGeometry(QRect(QPoint(10,85), QSize(480,30)));
     result_label->setStyleSheet("font: 18pt; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
 
     //Creats a list view to hold all the previous calculations
@@ -93,7 +94,37 @@ void edp_window_2::calc_save(){
         }
 }
 
+//Function to allow some of the funcitonality to allow the list view to be more dynamic.
+void edp_window_2::qt_history(QStringList List){
+    //A range for loop to go through every value in the vector and push it through the List.
+    for(QString i : all_calculations ){
+        List << i;
+    }
+    //Connects the "List" to the history_list container.
+    history_list->setStringList(List);
+    history->setModel(history_list);
+    history->QAbstractItemView::scrollToBottom(); //Makes the list view scroll to the bottom. Effectively making it scroll to the bottom with each added calculation to the list.
+}
+
 void edp_window_2::create_lbuttons(){
+
+    //Radio Buttons
+    decimal_radio = new QRadioButton("Decimal", this);
+    decimal_radio -> setGeometry(QRect(QPoint(10,120), QSize(65,30)));
+    decimal_radio->setChecked(true);
+
+    binary_radio = new QRadioButton("Binary", this);
+    binary_radio -> setGeometry(QRect(QPoint(10,140), QSize(55,30)));
+
+    hex_radio = new QRadioButton("Hex", this);
+    hex_radio -> setGeometry(QRect(QPoint(160, 120), QSize(42,30)));
+
+    octal_radio = new QRadioButton("Octal", this);
+    octal_radio -> setGeometry(QRect(QPoint(160, 140), QSize(55,30)));
+
+}
+
+void edp_window_2::create_rbuttons(){
     qDebug() << "Label buttons Creation: 1" ;
 
     //Manual creation of push buttons
@@ -266,18 +297,6 @@ void edp_window_2::operator_setup(){
     all_calculations.push_back(pushback_container);
     qt_history(edp2_List); //Calls the function with the "List", this is what will populate the list view. This will also add a new calculation everytime the result button is clicked.
 
-}
-
-//Function to allow some of the funcitonality to allow the list view to be more dynamic.
-void edp_window_2::qt_history(QStringList List){
-    //A range for loop to go through every value in the vector and push it through the List.
-    for(QString i : all_calculations ){
-        List << i;
-    }
-    //Connects the "List" to the history_list container.
-    history_list->setStringList(List);
-    history->setModel(history_list);
-    history->QAbstractItemView::scrollToBottom(); //Makes the list view scroll to the bottom. Effectively making it scroll to the bottom with each added calculation to the list.
 }
 
 
