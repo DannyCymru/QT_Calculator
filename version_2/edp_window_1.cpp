@@ -17,7 +17,7 @@ edp_window_1::edp_window_1(QWidget *parent) :
     s_math = new standard_math();
     window_2 = new edp_window_2();
 
-    //Manually set window title
+    //Set window title
     setWindowTitle("EDP Calc");
 
     //menu bar functions
@@ -33,6 +33,7 @@ edp_window_1::edp_window_1(QWidget *parent) :
     result_label->setAlignment(Qt::AlignRight); //Aligns the information to the right
     result_label->setGeometry(QRect(QPoint(10,85), QSize(280,30)));
     result_label->setStyleSheet("font: 18pt; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
+    result_label->setStatusTip("Shows the numbers you enter and the final result");
 
     //Creats a list view to hold all the previous calculations
     history = new QListView(this);
@@ -41,12 +42,12 @@ edp_window_1::edp_window_1(QWidget *parent) :
     history->QAbstractItemView::setEditTriggers(QAbstractItemView::NoEditTriggers); //This removes the ability to edit the list
     history->QAbstractItemView::scrollToTop();
     history_list = new QStringListModel(this); //Connects the list view with a list of data
-
+    history->setStatusTip("Holds all your previous calculations");
 }
 
 void edp_window_1::create_digit_buttons(){
 
-    //Manual creation of push buttons
+    //Creation of push buttons
     digit_button_0 = new QPushButton("0", this);
     digit_button_0 -> setGeometry(QRect(QPoint(10,270), QSize(100,50)));
 
@@ -104,7 +105,7 @@ void edp_window_1::digit_press() {
     QString val_string = QString::number(value); //The new value becomes a string of the number from the label
     result_label->setText(val_string); //Label is now the updated value from the button click
 
-    clear_timer->start(10000);
+    clear_timer->start(10000); //Starts/re-starts the timer on button click
 
 }
 
@@ -120,23 +121,29 @@ void edp_window_1::create_other_buttons(){
     //Buttons for simple math calculations
     add_button = new QPushButton("+", this);
     add_button -> setGeometry(QRect(QPoint(190,170), QSize(50,50)));
+    add_button->setToolTip("Starts the calculation to add two numbers you enter together");
 
     sub_button = new QPushButton("-", this);
     sub_button -> setGeometry(QRect(QPoint(240,170), QSize(50,50)));
+    sub_button->setToolTip("Starts the calculation to subtract two numbers you enter");
 
     mult_button = new QPushButton("X", this);
     mult_button -> setGeometry(QRect(QPoint(190,220), QSize(50,50)));
+    mult_button->setToolTip("Starts the calculation to multiply two numbers you enter together");
 
     div_button = new QPushButton("/", this);
     div_button -> setGeometry(QRect(QPoint(240,220), QSize(50,50)));
+    div_button->setToolTip("Starts the calculation to divide two numbers you enter");
 
     //Auxillary function buttons
     clear_button = new QPushButton("Clr", this);
     clear_button -> setGeometry(QRect(QPoint(190, 120), QSize(100,50)));
     clear_button->setStyleSheet("background-color: #c23616;");
+    clear_button->setToolTip("Clears every number entered, at any stage of the calculation to allow you to do a completely new calculation");
 
     result_button = new QPushButton("=", this);
     result_button->setGeometry(QRect(QPoint(190,270), QSize(100, 50)));
+    result_button->setToolTip("Finishes the calculation used and prints out the full result");
 
     //Creates the timer
     clear_timer = new QTimer(this);
@@ -248,10 +255,6 @@ void edp_window_1::create_actions(){
     av_action->setStatusTip("Opens advanced view");
     connect(av_action, &QAction::triggered, this, &edp_window_1::av_view);
 
-    help_action = new QAction("Help", this);
-    help_action->setShortcut(QKeySequence(tr("Ctrl+h")));
-    help_action->setStatusTip("Get information on how to use the program");
-    connect(help_action, &QAction::triggered, this, &edp_window_1::help_view);
 }
 
 //Creates the menus
@@ -261,9 +264,6 @@ void edp_window_1::create_menus(){
 
    view = menuBar()->addMenu("View");
    view->addAction(av_action);
-
-   help = menuBar()->addMenu("Help");
-   help->addAction(help_action);
 }
 
 //code for creating a save file of all the calculations
@@ -294,11 +294,6 @@ void edp_window_1::calc_save(){
 void edp_window_1::av_view(){
    hide();
    window_2->show();
-}
-
-//hides the first form and shows the help information
-void edp_window_1::help_view(){
-    hide();
 }
 
 edp_window_1::~edp_window_1(){

@@ -21,34 +21,37 @@ private slots:
     void digit_press();
     void period_press();
     void calc_save();
-    void help_view();
     void add_press();
     void sub_press();
     void div_press();
     void mult_press();
     void clr_press();
     void result_press();
+    void conversion();
 
 private:
     //Functions
     void create_menus();
     void create_actions();
+    void create_rbuttons();
     void create_lbuttons();
     void create_smath_buttons();
     void qt_history(QStringList edp2_List);
     void operator_setup();
 
     //Objects
-    QLabel *result_label;
+
+    //menubar
     QMenu *file_menu;
-    QMenu *help;
     QMenu *view;
     QAction *save_action;
-    QAction *help_action;
     QListView *history;
     QStringListModel *history_list;
     QVector<QString> all_calculations;
+    //Content Labels
     QString pushback_container;
+    QLabel *result_label;
+    //rbuttons
     QPushButton *digit_button_0;
     QPushButton *digit_button_1;
     QPushButton *digit_button_2;
@@ -67,7 +70,11 @@ private:
     QPushButton *result_button;
     QPushButton *clear_button;
     QTimer *clear_timer;
-
+    //lbuttons
+    QRadioButton *decimal_radio;
+    QRadioButton *octal_radio;
+    QRadioButton *hex_radio;
+    QRadioButton *binary_radio;
     //Pointers
     advanced_math *a_math;
     Ui::edp_window_2 *ui;

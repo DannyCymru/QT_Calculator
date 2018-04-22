@@ -16,5 +16,8 @@
 #include <QMessageBox>
 #include <QTimer>
 #include <QAction>
+#include <QRadioButton>
+#include <QAbstractButton>
+#include <bitset>
 
 #endif // INCLUDED_HEADERS_H
