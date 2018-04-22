@@ -5,6 +5,8 @@ double edp2_value{0};
 double edp2_val_1;
 double edp2_val_2;
 double edp2_returned_val;
+
+QString total{"not this"};
 QStringList edp2_List;
 
 
@@ -16,7 +18,8 @@ edp_window_2::edp_window_2(QWidget *parent) :
     a_math = new advanced_math();
 
     edp_window_2::setFixedSize(500, 340);
-    setWindowTitle("EDP Calc Advanced View");
+
+    setWindowTitle("EDP Calc Advanced View"); //Sets new title window
 
     //Populate menubar with actions
     create_actions();
@@ -32,6 +35,7 @@ edp_window_2::edp_window_2(QWidget *parent) :
     result_label->setAlignment(Qt::AlignRight); //Aligns the information to the right
     result_label->setGeometry(QRect(QPoint(10,85), QSize(480,30)));
     result_label->setStyleSheet("font: 18pt; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
+    result_label->setStatusTip("Shows the numbers you enter and the final result");
 
     //Creats a list view to hold all the previous calculations
     history = new QListView(this);
@@ -40,16 +44,14 @@ edp_window_2::edp_window_2(QWidget *parent) :
     history->QAbstractItemView::setEditTriggers(QAbstractItemView::NoEditTriggers); //This removes the ability to edit the list
     history->QAbstractItemView::scrollToTop();
     history_list = new QStringListModel(this); //Connects the list view with a list of data
+    history->setStatusTip("Holds all your previous calculations");
+
 }
 
 void edp_window_2::create_menus(){
     qDebug() << "Menu Creation: 1" ;
-
     file_menu = menuBar()->addMenu("File");
     file_menu->addAction(save_action);
-
-    help = menuBar()->addMenu("Help");
-    help->addAction(help_action);
 }
 
 void edp_window_2::create_actions(){
@@ -58,17 +60,7 @@ void edp_window_2::create_actions(){
     save_action->setShortcut(QKeySequence::Save);
     save_action->setStatusTip("Saves all of your calculations");
     connect(save_action, &QAction::triggered, this, &edp_window_2::calc_save);
-
-    help_action = new QAction("Help", this);
-    help_action->setShortcut(QKeySequence(tr("Ctrl+h")));
-    help_action->setStatusTip("Get information on how to use the program");
-    connect(help_action, &QAction::triggered, this, &edp_window_2::help_view);
 };
-
-void edp_window_2::help_view(){
-    hide();
-
-}
 
 void edp_window_2::calc_save(){
     qDebug() << "calc save" ;
@@ -112,15 +104,52 @@ void edp_window_2::create_lbuttons(){
     decimal_radio = new QRadioButton("Decimal", this);
     decimal_radio -> setGeometry(QRect(QPoint(10,120), QSize(65,30)));
     decimal_radio->setChecked(true);
+    decimal_radio->setStatusTip("Converts the numbers to decimal");
+    connect(decimal_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
     binary_radio = new QRadioButton("Binary", this);
     binary_radio -> setGeometry(QRect(QPoint(10,140), QSize(55,30)));
+    binary_radio->setStatusTip("Converts the numbers to binary");
+    connect(binary_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
     hex_radio = new QRadioButton("Hex", this);
     hex_radio -> setGeometry(QRect(QPoint(160, 120), QSize(42,30)));
+    hex_radio->setStatusTip("Converts the numbers to hexadecimal");
+    connect(hex_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
     octal_radio = new QRadioButton("Octal", this);
     octal_radio -> setGeometry(QRect(QPoint(160, 140), QSize(55,30)));
+    octal_radio->setStatusTip("Converts the numbers to octal");
+    connect(octal_radio, SIGNAL(clicked()),this,SLOT(conversion()));
+
+}
+
+void edp_window_2::conversion(){
+    qDebug() << "You just clicked";
+    QString alt_string = {"Temp Value"};
+
+    if (decimal_radio->isChecked()){
+        alt_string = QString::number(total.toInt(), 10);
+        result_label -> setText(alt_string);
+    }
+
+    else if(binary_radio->isChecked()) {
+        qDebug() << "binary";
+        alt_string = QString::number(total.toInt(), 2);
+        result_label -> setText(alt_string);
+    }
+
+    else if(octal_radio->isChecked()){
+        qDebug() << "Octal";
+        alt_string = QString::number(total.toInt(), 8);
+        result_label -> setText(alt_string);
+    }
+
+    else if(hex_radio->isChecked()){
+        qDebug() << "Hex";
+        alt_string = QString::number(total.toInt(), 16);
+        result_label -> setText(alt_string);
+    }
 
 }
 
@@ -180,23 +209,29 @@ void edp_window_2::create_smath_buttons(){
     //Buttons for simple math calculations
     add_button = new QPushButton("+", this);
     add_button -> setGeometry(QRect(QPoint(390,170), QSize(50,50)));
+    add_button->setToolTip("Starts the calculation to add two numbers you enter together");
 
     sub_button = new QPushButton("-", this);
     sub_button -> setGeometry(QRect(QPoint(440,170), QSize(50,50)));
+    sub_button->setToolTip("Starts the calculation to subtract two numbers you enter");
 
     mult_button = new QPushButton("X", this);
     mult_button -> setGeometry(QRect(QPoint(390,220), QSize(50,50)));
+    mult_button->setToolTip("Starts the calculation to multiply two numbers you enter together");
 
     div_button = new QPushButton("/", this);
     div_button -> setGeometry(QRect(QPoint(440,220), QSize(50,50)));
+    div_button->setToolTip("Starts the calculation to divide two numbers you enter");
 
     //Auxillary function buttons
     clear_button = new QPushButton("Clr", this);
     clear_button -> setGeometry(QRect(QPoint(390, 120), QSize(100,50)));
     clear_button->setStyleSheet("background-color: #c23616;");
+    clear_button->setToolTip("Clears every number entered, at any stage of the calculation to allow you to do a completely new calculation");
 
     result_button = new QPushButton("=", this);
     result_button->setGeometry(QRect(QPoint(390,270), QSize(100, 50)));
+    result_button->setToolTip("Finishes the calculation used and prints out the full result");
 
     //Creates the timer
     clear_timer = new QTimer(this);
@@ -273,19 +308,23 @@ void edp_window_2::operator_setup(){
     switch (edp2_c_op) {
         case '+':
             a_math->edp2_add(edp2_val_1, edp2_val_2);
-            result_label->setText(QString::number(edp2_returned_val));
+            total = QString::number(edp2_returned_val);
+            result_label->setText(total);
             break;
         case '-':
             a_math->edp2_subtract(edp2_val_1, edp2_val_2);
-            result_label->setText(QString::number(edp2_returned_val));
+            total = QString::number(edp2_returned_val);
+            result_label->setText(total);
             break;
         case '*':
             a_math->edp2_multiply(edp2_val_1, edp2_val_2);
-            result_label->setText(QString::number(edp2_returned_val));
+            total = QString::number(edp2_returned_val);
+            result_label->setText(total);
             break;
         case '/':
             a_math->edp2_divide(edp2_val_1, edp2_val_2);
-            result_label->setText(QString::number(edp2_returned_val));
+            total = QString::number(edp2_returned_val);
+            result_label->setText(total);
             break;
         default:
             qDebug("Failure");
@@ -297,9 +336,8 @@ void edp_window_2::operator_setup(){
     all_calculations.push_back(pushback_container);
     qt_history(edp2_List); //Calls the function with the "List", this is what will populate the list view. This will also add a new calculation everytime the result button is clicked.
 
+    //edp2_val_1=0; //this is
 }
-
-
 
 edp_window_2::~edp_window_2()
 {

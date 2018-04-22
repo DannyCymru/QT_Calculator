@@ -21,13 +21,13 @@ private slots:
     void digit_press();
     void period_press();
     void calc_save();
-    void help_view();
     void add_press();
     void sub_press();
     void div_press();
     void mult_press();
     void clr_press();
     void result_press();
+    void conversion();
 
 private:
     //Functions
@@ -43,10 +43,8 @@ private:
 
     //menubar
     QMenu *file_menu;
-    QMenu *help;
     QMenu *view;
     QAction *save_action;
-    QAction *help_action;
     QListView *history;
     QStringListModel *history_list;
     QVector<QString> all_calculations;

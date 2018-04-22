@@ -32,7 +32,6 @@ private slots:
     void result_press();
     void calc_save();
     void av_view();
-    void help_view();
 
 
 private:
@@ -46,11 +45,9 @@ private:
 
     //Objects
     QMenu *file_menu;
-    QMenu *help;
     QMenu *view;
     QAction *av_action;
     QAction *save_action;
-    QAction *help_action;
     QLabel *result_label;
     QListView *history;
     QStringListModel *history_list;
