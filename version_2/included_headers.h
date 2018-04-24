@@ -19,5 +19,6 @@
 #include <QRadioButton>
 #include <QAbstractButton>
 #include <bitset>
+#include <cmath>
 
 #endif // INCLUDED_HEADERS_H

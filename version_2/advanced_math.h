@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QWidget>
+#include <included_headers.h>
 
 extern double edp2_returned_val;
 extern char edp2_c_op;
@@ -17,6 +18,10 @@ public:
     double edp2_subtract(double edp2_val_1, double edp2_val_2);
     double edp2_multiply(double edp2_val_1, double edp2_val_2);
     double edp2_divide(double edp2_val_1, double edp2_val_2);
+    double edp2_sin(double edp2_val_1);
+    double edp2_cos(double edp2_val_1);
+    double edp2_tan(double edp2_val_1);
+    double edp2_log(double edp2_val_1);
 
 private:
 

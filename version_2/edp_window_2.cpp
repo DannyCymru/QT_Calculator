@@ -105,23 +105,70 @@ void edp_window_2::create_lbuttons(){
     decimal_radio -> setGeometry(QRect(QPoint(10,120), QSize(65,30)));
     decimal_radio->setChecked(true);
     decimal_radio->setStatusTip("Converts the numbers to decimal");
-    connect(decimal_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
     binary_radio = new QRadioButton("Binary", this);
     binary_radio -> setGeometry(QRect(QPoint(10,140), QSize(55,30)));
     binary_radio->setStatusTip("Converts the numbers to binary");
-    connect(binary_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
     hex_radio = new QRadioButton("Hex", this);
     hex_radio -> setGeometry(QRect(QPoint(160, 120), QSize(42,30)));
     hex_radio->setStatusTip("Converts the numbers to hexadecimal");
-    connect(hex_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
     octal_radio = new QRadioButton("Octal", this);
     octal_radio -> setGeometry(QRect(QPoint(160, 140), QSize(55,30)));
     octal_radio->setStatusTip("Converts the numbers to octal");
+
+    sin_button = new QPushButton("Sin", this);
+    sin_button->setGeometry(QRect(QPoint(10, 180), QSize(100, 50)));
+
+    tan_button = new QPushButton("Tan", this);
+    tan_button->setGeometry(QRect(QPoint(120, 180), QSize(100, 50)));
+
+    cos_button = new QPushButton("Cos", this);
+    cos_button->setGeometry(QRect(QPoint(10, 230), QSize(100, 50)));
+
+    log_button = new QPushButton("Log", this);
+    log_button->setGeometry(QRect(QPoint(120, 230), QSize(100, 50)));
+
+    //Radio button connects
+    connect(decimal_radio, SIGNAL(clicked()),this,SLOT(conversion()));
+    connect(binary_radio, SIGNAL(clicked()),this,SLOT(conversion()));
+    connect(hex_radio, SIGNAL(clicked()),this,SLOT(conversion()));
     connect(octal_radio, SIGNAL(clicked()),this,SLOT(conversion()));
 
+    //Push Button Connections
+    connect(sin_button, SIGNAL(released()),this,SLOT(sin_press()));
+    connect(cos_button, SIGNAL(released()), this, SLOT(cos_press()));
+    connect(tan_button, SIGNAL(released()), this, SLOT(tan_press()));
+    connect(log_button, SIGNAL(released()), this, SLOT(log_press()));
+}
+
+void edp_window_2::sin_press(){
+    qDebug() << "Sin for the world";
+    edp2_val_1 = edp2_value;
+    a_math->edp2_sin(edp2_val_1);
+    result_label->setText(QString::number(edp2_returned_val));
+}
+
+void edp_window_2::tan_press(){
+    qDebug() << "Tan for the world";
+    edp2_val_1 = edp2_value;
+    a_math->edp2_tan(edp2_val_1);
+    result_label->setText(QString::number(edp2_returned_val));
+}
+
+void edp_window_2::cos_press(){
+    qDebug() << "Cos for the world";
+    edp2_val_1 = edp2_value;
+    a_math->edp2_cos(edp2_val_1);
+    result_label->setText(QString::number(edp2_returned_val));
+}
+
+void edp_window_2::log_press(){
+    qDebug() << "Log for the world";
+    edp2_val_1 = edp2_value;
+    a_math->edp2_log(edp2_val_1);
+    result_label->setText(QString::number(edp2_returned_val));
 }
 
 void edp_window_2::conversion(){

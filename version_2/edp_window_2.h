@@ -28,6 +28,10 @@ private slots:
     void clr_press();
     void result_press();
     void conversion();
+    void sin_press();
+    void tan_press();
+    void cos_press();
+    void log_press();
 
 private:
     //Functions
@@ -75,6 +79,10 @@ private:
     QRadioButton *octal_radio;
     QRadioButton *hex_radio;
     QRadioButton *binary_radio;
+    QPushButton *sin_button;
+    QPushButton *cos_button;
+    QPushButton *tan_button;
+    QPushButton *log_button;
     //Pointers
     advanced_math *a_math;
     Ui::edp_window_2 *ui;
