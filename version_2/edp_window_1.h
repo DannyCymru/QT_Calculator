@@ -2,7 +2,6 @@
 #define EDP_WINDOW_1_H
 
 #include <QtCore/QCoreApplication>
-#include <QMainWindow>
 #include <standard_math.h>
 #include <edp_window_2.h>
 

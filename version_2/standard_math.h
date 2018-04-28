@@ -1,8 +1,7 @@
 #ifndef STANDARD_MATH_H
 #define STANDARD_MATH_H
 
-#include <QMainWindow>
-#include <QWidget>
+#include <included_headers.h>
 
 //Variables
 extern double returned_val;

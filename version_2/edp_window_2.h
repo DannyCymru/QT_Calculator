@@ -1,9 +1,8 @@
 #ifndef EDP_WINDOW_2_H
 #define EDP_WINDOW_2_H
 
-#include <QMainWindow>
-#include <included_headers.h>
 #include <advanced_math.h>
+#include <edp_help.h>
 
 namespace Ui {
 class edp_window_2;

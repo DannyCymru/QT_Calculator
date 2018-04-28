@@ -1,8 +1,6 @@
 #ifndef ADVANCED_MATH_H
 #define ADVANCED_MATH_H
 
-#include <QMainWindow>
-#include <QWidget>
 #include <included_headers.h>
 
 extern double edp2_returned_val;
