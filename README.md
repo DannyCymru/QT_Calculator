@@ -30,7 +30,7 @@ To Do List
 
 -[x] Add conversion to binary, hex, octal.
 
--[] Add a help guide form, per my EDP classes specification
+-[x] Add a help form, per my EDP classes specification
 
 -[] Add math operations with binary numbers.
 
