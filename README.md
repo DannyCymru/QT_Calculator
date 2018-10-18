@@ -17,18 +17,18 @@ This was originally the GUI build of the decimal converter found here: https://g
 Version 2
 ---------
 
-Version 2 is my second attempt at making a GUI calculator. It was created mainly for an assignment I had in my Event Driven Program class in college. Hence why it has a random timer to clear the result label and the unnecessary save function.
+Version 2 is my second attempt at making a GUI calculator. It was created mainly for an assignment I had in my Event Driven Program class in college. Because of this I had to add some features that may appear slightly unnecessary for this type of application.
 
 To Do List
 ----------
 
 -[x] Completed Task -[ ] Incomplete Task
 
--[] Add a form for "advanced view".  
+-[x] Add a form for "advanced view".  
 
 -[] Add more advanced mathematical operations
 
--[] Add conversion to binary, hex, octal.
+-[x] Add conversion to binary, hex, octal.
 
 -[] Add a help guide form, per my EDP classes specification
 
