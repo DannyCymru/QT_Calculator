@@ -12,7 +12,7 @@ Description/Background information
 Version 1
 ---------
 
-This was originally the GUI build of the decimal converter found here: https://gitlab.com/ErebusC/small_projects/tree/master/cpp_projects/Decimal_converter. While creating this program however I decided to add standard mathmatical operations to increase its functionality, in doing so I created a GUI program that does not closely relate to that project. 
+This was originally the GUI build of the decimal converter found here: https://gitlab.com/ErebusC/small_projects/tree/master/cpp_projects/Decimal_converter. While creating this program however I decided to add standard mathmatical operations to increase its functionality, in doing so I also decided to create a GUI program that does not closely relate to that project. 
 
 Version 2
 ---------
@@ -26,14 +26,12 @@ To Do List
 
 -[x] Add a form for "advanced view".  
 
--[] Add more advanced mathematical operations
+-[x] Add more advanced mathematical operations
 
 -[x] Add conversion to binary, hex, octal.
-
--[x] Add a help form, per my EDP classes specification
 
 -[] Add math operations with binary numbers.
 
 -[] Add keyboard functionality.
 
--[] Add "Help" and "View" items to the menu bar. 
+-[x] Add View" items to the menu bar. 
