@@ -32,7 +32,7 @@ edp_window_1::edp_window_1(QWidget *parent) :
     result_label = new QLabel("0",this);
     result_label->setAlignment(Qt::AlignRight); //Aligns the information to the right
     result_label->setGeometry(QRect(QPoint(10,85), QSize(280,30)));
-    result_label->setStyleSheet("font: 18pt; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
+    result_label->setStyleSheet("font: 18pt; color:black; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
     result_label->setStatusTip("Shows the numbers you enter and the final result");
 
     //Creats a list view to hold all the previous calculations
@@ -220,7 +220,6 @@ void edp_window_1::operator_setup(){
             result_label->setText(QString::number(returned_val));
             break;
         default:
-            qDebug("Failure");
             break;
     }
 

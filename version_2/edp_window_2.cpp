@@ -15,6 +15,8 @@ edp_window_2::edp_window_2(QWidget *parent) :
     ui(new Ui::edp_window_2)
 {
     ui->setupUi(this);
+
+    //Create Pointer
     a_math = new advanced_math();
 
     edp_window_2::setFixedSize(500, 340);
@@ -34,7 +36,7 @@ edp_window_2::edp_window_2(QWidget *parent) :
     result_label = new QLabel("0",this);
     result_label->setAlignment(Qt::AlignRight); //Aligns the information to the right
     result_label->setGeometry(QRect(QPoint(10,85), QSize(480,30)));
-    result_label->setStyleSheet("font: 18pt; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
+    result_label->setStyleSheet("font: 18pt; color: black; background-color:#e3e3e3;"); //Allows for style changes using CSS-like syntax
     result_label->setStatusTip("Shows the numbers you enter and the final result");
 
     //Creats a list view to hold all the previous calculations
@@ -49,13 +51,11 @@ edp_window_2::edp_window_2(QWidget *parent) :
 }
 
 void edp_window_2::create_menus(){
-    qDebug() << "Menu Creation: 1" ;
     file_menu = menuBar()->addMenu("File");
     file_menu->addAction(save_action);
 }
 
 void edp_window_2::create_actions(){
-    qDebug() << "Action Creation: 1" ;
     save_action = new QAction("Save", this);
     save_action->setShortcut(QKeySequence::Save);
     save_action->setStatusTip("Saves all of your calculations");
@@ -63,7 +63,6 @@ void edp_window_2::create_actions(){
 };
 
 void edp_window_2::calc_save(){
-    qDebug() << "calc save" ;
     QString file_name = QFileDialog::getSaveFileName(this,
             tr("Save your calcualtions"), "",
             tr("Text File (*.txt);;All Files (*)"));
@@ -144,36 +143,31 @@ void edp_window_2::create_lbuttons(){
 }
 
 void edp_window_2::sin_press(){
-    qDebug() << "Sin for the world";
     edp2_val_1 = edp2_value;
     a_math->edp2_sin(edp2_val_1);
     result_label->setText(QString::number(edp2_returned_val));
 }
 
 void edp_window_2::tan_press(){
-    qDebug() << "Tan for the world";
     edp2_val_1 = edp2_value;
     a_math->edp2_tan(edp2_val_1);
     result_label->setText(QString::number(edp2_returned_val));
 }
 
 void edp_window_2::cos_press(){
-    qDebug() << "Cos for the world";
     edp2_val_1 = edp2_value;
     a_math->edp2_cos(edp2_val_1);
     result_label->setText(QString::number(edp2_returned_val));
 }
 
 void edp_window_2::log_press(){
-    qDebug() << "Log for the world";
     edp2_val_1 = edp2_value;
     a_math->edp2_log(edp2_val_1);
     result_label->setText(QString::number(edp2_returned_val));
 }
 
 void edp_window_2::conversion(){
-    qDebug() << "You just clicked";
-    QString alt_string = {"Temp Value"};
+    QString alt_string = "Temp Value";
 
     if (decimal_radio->isChecked()){
         alt_string = QString::number(total.toInt(), 10);
@@ -181,19 +175,16 @@ void edp_window_2::conversion(){
     }
 
     else if(binary_radio->isChecked()) {
-        qDebug() << "binary";
         alt_string = QString::number(total.toInt(), 2);
         result_label -> setText(alt_string);
     }
 
     else if(octal_radio->isChecked()){
-        qDebug() << "Octal";
         alt_string = QString::number(total.toInt(), 8);
         result_label -> setText(alt_string);
     }
 
     else if(hex_radio->isChecked()){
-        qDebug() << "Hex";
         alt_string = QString::number(total.toInt(), 16);
         result_label -> setText(alt_string);
     }
@@ -201,7 +192,6 @@ void edp_window_2::conversion(){
 }
 
 void edp_window_2::create_rbuttons(){
-    qDebug() << "Label buttons Creation: 1" ;
 
     //Manual creation of push buttons
     digit_button_0 = new QPushButton("0", this);
@@ -252,7 +242,6 @@ void edp_window_2::create_rbuttons(){
 }
 
 void edp_window_2::create_smath_buttons(){
-    qDebug() << "Create math buttons";
     //Buttons for simple math calculations
     add_button = new QPushButton("+", this);
     add_button -> setGeometry(QRect(QPoint(390,170), QSize(50,50)));
@@ -296,7 +285,6 @@ void edp_window_2::create_smath_buttons(){
 }
 
 void edp_window_2::digit_press(){
-    qDebug() << "Digit Pressed Function: 1";
     QPushButton *button =(QPushButton*)sender(); //On detection of a sender from the connected QPushButtons
     edp2_value = (result_label->text() + button->text()).toDouble(); //the value variable takes the text in the label + takes the specific buttons text, turning it into a double
     QString val_string = QString::number(edp2_value); //The new value becomes a string of the number from the label
@@ -374,7 +362,6 @@ void edp_window_2::operator_setup(){
             result_label->setText(total);
             break;
         default:
-            qDebug("Failure");
             break;
     }
 
@@ -382,8 +369,6 @@ void edp_window_2::operator_setup(){
     pushback_container = QString::number(edp2_val_1) + " " + QString(edp2_c_op) + " " + QString::number(edp2_val_2) + " = " + QString::number(edp2_returned_val) + "\n";
     all_calculations.push_back(pushback_container);
     qt_history(edp2_List); //Calls the function with the "List", this is what will populate the list view. This will also add a new calculation everytime the result button is clicked.
-
-    //edp2_val_1=0; //this is
 }
 
 edp_window_2::~edp_window_2()

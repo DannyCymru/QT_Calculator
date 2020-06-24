@@ -1,6 +1,5 @@
 #include "standard_math.h"
 
-
 char c_op{'n'};
 
 standard_math::standard_math()

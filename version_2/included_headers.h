@@ -1,7 +1,6 @@
 #ifndef INCLUDED_HEADERS_H
 #define INCLUDED_HEADERS_H
 
-#include <QDebug>
 #include <QPushButton>
 #include <QLabel>
 #include <QString>
