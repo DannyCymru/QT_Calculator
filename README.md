@@ -30,8 +30,10 @@ To Do List
 
 -[x] Add conversion to binary, hex, octal.
 
--[] Add math operations with binary numbers.
+~~-[] Add math operations with binary numbers.~~
 
--[] Add keyboard functionality.
+~~-[] Add keyboard functionality.~~
 
 -[x] Add View" items to the menu bar. 
+
+As this code is very old and quite outdated I have decided to officially call this project completed. There is too much tech debt involved for this project for me to do more changes without major refactoring and I feel that my programming efforts are best spent elsewhere.
